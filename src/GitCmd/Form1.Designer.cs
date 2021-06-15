@@ -28,6 +28,7 @@ namespace GitCmd
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonGit = new System.Windows.Forms.Button();
             this.textBoxGitPara = new System.Windows.Forms.TextBox();
@@ -36,11 +37,12 @@ namespace GitCmd
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxOnlyChanges = new System.Windows.Forms.CheckBox();
             this.checkedListBoxGitDir = new System.Windows.Forms.CheckedListBox();
+            this.contextMenuStripCheckedListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBoxGitCmd = new System.Windows.Forms.TextBox();
+            this.comboBoxPara = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBoxPara = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -117,11 +119,20 @@ namespace GitCmd
             // 
             // checkedListBoxGitDir
             // 
+            this.checkedListBoxGitDir.ContextMenuStrip = this.contextMenuStripCheckedListBox;
             this.checkedListBoxGitDir.FormattingEnabled = true;
             this.checkedListBoxGitDir.Location = new System.Drawing.Point(3, 31);
             this.checkedListBoxGitDir.Name = "checkedListBoxGitDir";
             this.checkedListBoxGitDir.Size = new System.Drawing.Size(423, 94);
             this.checkedListBoxGitDir.TabIndex = 5;
+            // 
+            // contextMenuStripCheckedListBox
+            // 
+            this.contextMenuStripCheckedListBox.Name = "contextMenuStripCheckedListBox";
+            this.contextMenuStripCheckedListBox.Size = new System.Drawing.Size(181, 26);
+            this.contextMenuStripCheckedListBox.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuStripCheckedListBox_Closing);
+            this.contextMenuStripCheckedListBox.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripCheckedListBox_Opening);
+            this.contextMenuStripCheckedListBox.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripCheckedListBox_ItemClicked);
             // 
             // textBoxGitCmd
             // 
@@ -129,6 +140,15 @@ namespace GitCmd
             this.textBoxGitCmd.Name = "textBoxGitCmd";
             this.textBoxGitCmd.Size = new System.Drawing.Size(96, 20);
             this.textBoxGitCmd.TabIndex = 4;
+            // 
+            // comboBoxPara
+            // 
+            this.comboBoxPara.FormattingEnabled = true;
+            this.comboBoxPara.Location = new System.Drawing.Point(534, 5);
+            this.comboBoxPara.Name = "comboBoxPara";
+            this.comboBoxPara.Size = new System.Drawing.Size(149, 21);
+            this.comboBoxPara.TabIndex = 7;
+            this.comboBoxPara.SelectedIndexChanged += new System.EventHandler(this.comboBoxPara_SelectedIndexChanged);
             // 
             // statusStrip1
             // 
@@ -153,15 +173,6 @@ namespace GitCmd
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(612, 229);
             this.panel2.TabIndex = 7;
-            // 
-            // comboBoxPara
-            // 
-            this.comboBoxPara.FormattingEnabled = true;
-            this.comboBoxPara.Location = new System.Drawing.Point(534, 5);
-            this.comboBoxPara.Name = "comboBoxPara";
-            this.comboBoxPara.Size = new System.Drawing.Size(149, 21);
-            this.comboBoxPara.TabIndex = 7;
-            this.comboBoxPara.SelectedIndexChanged += new System.EventHandler(this.comboBoxPara_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -200,6 +211,7 @@ namespace GitCmd
         private System.Windows.Forms.CheckedListBox checkedListBoxGitDir;
         private System.Windows.Forms.CheckBox checkBoxOnlyChanges;
         private System.Windows.Forms.ComboBox comboBoxPara;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripCheckedListBox;
     }
 }
 

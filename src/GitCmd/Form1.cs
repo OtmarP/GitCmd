@@ -21,6 +21,7 @@ namespace GitCmd
             this.toolStripStatusLabel1.Text = "";
 
             //------------------------------
+            // Mo.14.06.2021 20:00:02 -op- mit contextMenuStripCheckedListBox
             // So.13.06.2021 18:25:47 -op- nach GitHub
             // So.13.06.2021 14:36:29 -op- mit checkedListBoxGitDir
             // So.13.06.2021 14:14:09 -op- mit Sample RunCmd.cs ExecuteCurl()
@@ -45,12 +46,24 @@ namespace GitCmd
 #endif
 
             this.comboBoxPara.Items.Clear();
+            this.comboBoxPara.Items.Add("branch");
             this.comboBoxPara.Items.Add("status");
             this.comboBoxPara.Items.Add("status -s");
             this.comboBoxPara.Items.Add("count-objects");
             this.comboBoxPara.Items.Add("count-objects -vH");
+            this.comboBoxPara.Items.Add("fetch");
+            this.comboBoxPara.Items.Add("diff --dirstat master origin/master");
+            this.comboBoxPara.Items.Add("diff --shortstat master origin/master");
+            this.comboBoxPara.Items.Add("pull");
+            this.comboBoxPara.Items.Add("--version");
+            this.comboBoxPara.Items.Add("--help");
             this.comboBoxPara.Items.Add("");
             this.comboBoxPara.Text = this.textBoxGitPara.Text;
+
+            this.contextMenuStripCheckedListBox.Items.Clear();
+            this.contextMenuStripCheckedListBox.Items.Add("Check All");
+            this.contextMenuStripCheckedListBox.Items.Add("Check Inverse");
+            this.contextMenuStripCheckedListBox.Items.Add("Check None");
 
             this.InitListBox();
 
@@ -252,6 +265,40 @@ namespace GitCmd
 
             // Display the command output.
             this.textBoxResult.Text = resultAll;
+        }
+
+        private void contextMenuStripCheckedListBox_Opening(object sender, CancelEventArgs e)
+        {
+            //
+        }
+
+        private void contextMenuStripCheckedListBox_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var text = e.ClickedItem.Text;
+            if (text== "Check All") {
+                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
+                {
+                    checkedListBoxGitDir.SetItemChecked(i, true);
+                }
+            }
+            if (text == "Check Inverse") {
+                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
+                {
+                    var stat = checkedListBoxGitDir.GetItemChecked(i);
+                    checkedListBoxGitDir.SetItemChecked(i, !stat);
+                }
+            }
+            if (text == "Check None") {
+                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
+                {
+                    checkedListBoxGitDir.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void contextMenuStripCheckedListBox_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            //
         }
     }
 }
