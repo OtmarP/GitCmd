@@ -21,6 +21,7 @@ namespace GitCmd
             this.toolStripStatusLabel1.Text = "";
 
             //------------------------------
+            // So.20.06.2021 18:16:19 -op- mit splitContainer1
             // Sa.19.06.2021 18:32:10 -op- mit GetGitBranch()
             // Mi.16.06.2021 18:36:23 -op- mit this.buttonGit.Enabled = false; Application.DoEvents();
             // Mo.14.06.2021 20:00:02 -op- mit contextMenuStripCheckedListBox
@@ -56,6 +57,7 @@ namespace GitCmd
             this.comboBoxPara.Items.Add("fetch");
             this.comboBoxPara.Items.Add("diff --dirstat master origin/master");     // main origin/main
             this.comboBoxPara.Items.Add("diff --shortstat master origin/master");   // main origin/main
+            this.comboBoxPara.Items.Add("log origin/master..HEAD");    // Outgoing Commits
             this.comboBoxPara.Items.Add("pull");
             this.comboBoxPara.Items.Add("--version");
             this.comboBoxPara.Items.Add("--help");
@@ -70,7 +72,9 @@ namespace GitCmd
             this.InitListBox();
 
             this.panel2.Dock = DockStyle.Fill;
+            this.splitContainer1.Dock = DockStyle.Fill;
             this.textBoxResult.Dock = DockStyle.Fill;
+            this.checkedListBoxGitDir.Dock = DockStyle.Fill;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
