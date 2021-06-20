@@ -21,6 +21,8 @@ namespace GitCmd
             this.toolStripStatusLabel1.Text = "";
 
             //------------------------------
+            // Sa.19.06.2021 18:32:10 -op- mit GetGitBranch()
+            // Mi.16.06.2021 18:36:23 -op- mit this.buttonGit.Enabled = false; Application.DoEvents();
             // Mo.14.06.2021 20:00:02 -op- mit contextMenuStripCheckedListBox
             // So.13.06.2021 18:25:47 -op- nach GitHub
             // So.13.06.2021 14:36:29 -op- mit checkedListBoxGitDir
@@ -52,8 +54,8 @@ namespace GitCmd
             this.comboBoxPara.Items.Add("count-objects");
             this.comboBoxPara.Items.Add("count-objects -vH");
             this.comboBoxPara.Items.Add("fetch");
-            this.comboBoxPara.Items.Add("diff --dirstat master origin/master");
-            this.comboBoxPara.Items.Add("diff --shortstat master origin/master");
+            this.comboBoxPara.Items.Add("diff --dirstat master origin/master");     // main origin/main
+            this.comboBoxPara.Items.Add("diff --shortstat master origin/master");   // main origin/main
             this.comboBoxPara.Items.Add("pull");
             this.comboBoxPara.Items.Add("--version");
             this.comboBoxPara.Items.Add("--help");
@@ -79,7 +81,12 @@ namespace GitCmd
 
         private void buttonGit_Click(object sender, EventArgs e)
         {
+            this.buttonGit.Enabled = false;
+            Application.DoEvents();
+
             this.RunGitCmd();
+
+            this.buttonGit.Enabled = true;
         }
 
         private void comboBoxPara_SelectedIndexChanged(object sender, EventArgs e)
@@ -192,13 +199,20 @@ namespace GitCmd
                         header1 = (i + 1).ToString() + "/" + checkedListBoxGitDir.Items.Count.ToString() + ".) " + this.textBoxGitDir.Text;
                         try
                         {
+                            string curBranch = this.GetGitBranch(this.textBoxGitDir.Text);
+
+                            string gitPara = this.textBoxGitPara.Text;
+                            if (gitPara.Contains("master")) {
+                                gitPara = gitPara.Replace("master", curBranch);
+                            }
+
                             //System.IO.Directory.SetCurrentDirectory(this.textBoxGitDir.Text);
 
                             System.Diagnostics.Process process = new System.Diagnostics.Process();
                             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                             // startInfo.WindowStyle
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/c " + this.textBoxGitCmd.Text + " " + this.textBoxGitPara.Text;
+                            startInfo.Arguments = "/c " + this.textBoxGitCmd.Text + " " + gitPara;
                             // The following commands are needed to redirect the standard output. 
                             //This means that it will be redirected to the Process.StandardOutput StreamReader.
                             startInfo.RedirectStandardOutput = true;
@@ -299,6 +313,40 @@ namespace GitCmd
         private void contextMenuStripCheckedListBox_Closing(object sender, ToolStripDropDownClosingEventArgs e)
         {
             //
+        }
+
+        private string GetGitBranch(string path) {
+            string ret = "master";
+
+            // git branch
+            // * main
+
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/c " + "git branch";
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.CreateNoWindow = true;
+            startInfo.UseShellExecute = false;
+            startInfo.WorkingDirectory = path;
+            process.StartInfo = startInfo;
+            process.Start();
+
+            // Get the output into a string
+            string result1 = process.StandardOutput.ReadToEnd();
+            string error1 = process.StandardError.ReadToEnd();
+
+            // \n -> \r\n
+            result1 = result1.Replace("\n", "\r\n");
+            error1 = error1.Replace("\n", "\r\n");
+
+            if (result1 != "") {
+                ret = result1.Replace("*", "").Trim();
+            }
+            //ret = "main";
+
+            return ret;
         }
     }
 }
