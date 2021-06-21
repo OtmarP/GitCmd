@@ -58,6 +58,7 @@ namespace GitCmd
             this.comboBoxPara.Items.Add("diff --dirstat master origin/master");     // main origin/main
             this.comboBoxPara.Items.Add("diff --shortstat master origin/master");   // main origin/main
             this.comboBoxPara.Items.Add("log origin/master..HEAD");    // Outgoing Commits
+            this.comboBoxPara.Items.Add("diff origin/master..HEAD");
             this.comboBoxPara.Items.Add("pull");
             this.comboBoxPara.Items.Add("--version");
             this.comboBoxPara.Items.Add("--help");

@@ -1,9 +1,29 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitCmd", "GitCmd\GitCmd.csproj", "{485F356C-DC56-4CCE-BB68-79B1D7125F3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution_Folder", "Solution_Folder", "{2F64A160-8930-4D85-85BA-03A71496225D}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{3FC2FEC9-A9FC-485A-A897-7148737A6A65}"
+	ProjectSection(SolutionItems) = preProject
+		..\img\Bild_20210613_172123_001.png = ..\img\Bild_20210613_172123_001.png
+		..\img\Bild_20210620_180819_001.png = ..\img\Bild_20210620_180819_001.png
+		..\img\Bild_20210620_180921_001.png = ..\img\Bild_20210620_180921_001.png
+		..\img\Bild_20210620_180952_001.png = ..\img\Bild_20210620_180952_001.png
+		..\img\Bild_20210620_181927_001.png = ..\img\Bild_20210620_181927_001.png
+		..\img\Bild_20210620_182038_001.png = ..\img\Bild_20210620_182038_001.png
+		..\img\Bild_20210620_182438_001.png = ..\img\Bild_20210620_182438_001.png
+		..\img\Bild_20210620_195351_001.png = ..\img\Bild_20210620_195351_001.png
+		..\img\Bild_20210620_195410_001.png = ..\img\Bild_20210620_195410_001.png
+		..\img\Bild_20210621_104816_001.png = ..\img\Bild_20210621_104816_001.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3FC2FEC9-A9FC-485A-A897-7148737A6A65} = {2F64A160-8930-4D85-85BA-03A71496225D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9E727EA-EBF1-497E-800E-993B75EE01AE}
