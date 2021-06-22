@@ -36,10 +36,10 @@ namespace GitCmd
             this.textBoxResult = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkBoxOnlyChanges = new System.Windows.Forms.CheckBox();
-            this.checkedListBoxGitDir = new System.Windows.Forms.CheckedListBox();
-            this.contextMenuStripCheckedListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBoxGitCmd = new System.Windows.Forms.TextBox();
             this.comboBoxPara = new System.Windows.Forms.ComboBox();
+            this.checkedListBoxGitDir = new System.Windows.Forms.CheckedListBox();
+            this.contextMenuStripCheckedListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -121,23 +121,6 @@ namespace GitCmd
             this.checkBoxOnlyChanges.Text = "nur Änderungen";
             this.checkBoxOnlyChanges.UseVisualStyleBackColor = true;
             // 
-            // checkedListBoxGitDir
-            // 
-            this.checkedListBoxGitDir.ContextMenuStrip = this.contextMenuStripCheckedListBox;
-            this.checkedListBoxGitDir.FormattingEnabled = true;
-            this.checkedListBoxGitDir.Location = new System.Drawing.Point(14, 15);
-            this.checkedListBoxGitDir.Name = "checkedListBoxGitDir";
-            this.checkedListBoxGitDir.Size = new System.Drawing.Size(441, 79);
-            this.checkedListBoxGitDir.TabIndex = 5;
-            // 
-            // contextMenuStripCheckedListBox
-            // 
-            this.contextMenuStripCheckedListBox.Name = "contextMenuStripCheckedListBox";
-            this.contextMenuStripCheckedListBox.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuStripCheckedListBox.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuStripCheckedListBox_Closing);
-            this.contextMenuStripCheckedListBox.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripCheckedListBox_Opening);
-            this.contextMenuStripCheckedListBox.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripCheckedListBox_ItemClicked);
-            // 
             // textBoxGitCmd
             // 
             this.textBoxGitCmd.Location = new System.Drawing.Point(432, 5);
@@ -153,6 +136,24 @@ namespace GitCmd
             this.comboBoxPara.Size = new System.Drawing.Size(149, 21);
             this.comboBoxPara.TabIndex = 7;
             this.comboBoxPara.SelectedIndexChanged += new System.EventHandler(this.comboBoxPara_SelectedIndexChanged);
+            // 
+            // checkedListBoxGitDir
+            // 
+            this.checkedListBoxGitDir.ContextMenuStrip = this.contextMenuStripCheckedListBox;
+            this.checkedListBoxGitDir.FormattingEnabled = true;
+            this.checkedListBoxGitDir.IntegralHeight = false;
+            this.checkedListBoxGitDir.Location = new System.Drawing.Point(14, 15);
+            this.checkedListBoxGitDir.Name = "checkedListBoxGitDir";
+            this.checkedListBoxGitDir.Size = new System.Drawing.Size(441, 79);
+            this.checkedListBoxGitDir.TabIndex = 5;
+            // 
+            // contextMenuStripCheckedListBox
+            // 
+            this.contextMenuStripCheckedListBox.Name = "contextMenuStripCheckedListBox";
+            this.contextMenuStripCheckedListBox.Size = new System.Drawing.Size(61, 4);
+            this.contextMenuStripCheckedListBox.Closing += new System.Windows.Forms.ToolStripDropDownClosingEventHandler(this.contextMenuStripCheckedListBox_Closing);
+            this.contextMenuStripCheckedListBox.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripCheckedListBox_Opening);
+            this.contextMenuStripCheckedListBox.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.contextMenuStripCheckedListBox_ItemClicked);
             // 
             // statusStrip1
             // 
