@@ -144,7 +144,8 @@ namespace GitCmd
             {
                 this.toolStripStatusLabel1.Text = "File OK: " + contentOK;
             }
-            else {
+            else
+            {
                 this.toolStripStatusLabel1.Text = "no File: GitListe<COMPUTER>.txt, GitListe.txt";
             }
 
@@ -207,7 +208,8 @@ namespace GitCmd
                             string curBranch = this.GetGitBranch(this.textBoxGitDir.Text);
 
                             string gitPara = this.textBoxGitPara.Text;
-                            if (gitPara.Contains("master")) {
+                            if (gitPara.Contains("master"))
+                            {
                                 gitPara = gitPara.Replace("master", curBranch);
                             }
 
@@ -294,20 +296,23 @@ namespace GitCmd
         private void contextMenuStripCheckedListBox_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var text = e.ClickedItem.Text;
-            if (text== "Check All") {
+            if (text == "Check All")
+            {
                 for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
                 {
                     checkedListBoxGitDir.SetItemChecked(i, true);
                 }
             }
-            if (text == "Check Inverse") {
+            if (text == "Check Inverse")
+            {
                 for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
                 {
                     var stat = checkedListBoxGitDir.GetItemChecked(i);
                     checkedListBoxGitDir.SetItemChecked(i, !stat);
                 }
             }
-            if (text == "Check None") {
+            if (text == "Check None")
+            {
                 for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
                 {
                     checkedListBoxGitDir.SetItemChecked(i, false);
@@ -320,7 +325,8 @@ namespace GitCmd
             //
         }
 
-        private string GetGitBranch(string path) {
+        private string GetGitBranch(string path)
+        {
             string ret = "master";
 
             // git branch
@@ -346,7 +352,8 @@ namespace GitCmd
             result1 = result1.Replace("\n", "\r\n");
             error1 = error1.Replace("\n", "\r\n");
 
-            if (result1 != "") {
+            if (result1 != "")
+            {
                 ret = result1.Replace("*", "").Trim();
             }
             //ret = "main";
