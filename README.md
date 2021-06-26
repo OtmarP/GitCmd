@@ -3,7 +3,7 @@
 Executes a git-Command for many Repositories:
 ![](./img/Bild_20210621_104816_001.png)
 
-Config:
+Config:   
 GitListe.txt | GitListe[ComputerName].txt
 
     1="C:\Dev\GitHub\OtmarP\GitCmd"
