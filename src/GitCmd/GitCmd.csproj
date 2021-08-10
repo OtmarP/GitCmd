@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Repository\Icon\32x32\apps\git.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -84,6 +87,11 @@
     <Content Include="GitListe.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Repository\Icon\16x16\apps\git.ico" />
+    <Content Include="Repository\Icon\22x22\apps\git.ico" />
+    <Content Include="Repository\Icon\24x24\apps\git.ico" />
+    <Content Include="Repository\Icon\32x32\apps\git.ico" />
+    <Content Include="Repository\Icon\48x48\apps\git.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

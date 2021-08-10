@@ -21,6 +21,7 @@ namespace GitCmd
             this.toolStripStatusLabel1.Text = "";
 
             //------------------------------
+            // Mo.09.08.2021 10:05:56 -op- Minimize Application To System Tray mit notifyIcon1
             // So.20.06.2021 18:16:19 -op- mit splitContainer1
             // Sa.19.06.2021 18:32:10 -op- mit GetGitBranch()
             // Mi.16.06.2021 18:36:23 -op- mit this.buttonGit.Enabled = false; Application.DoEvents();
@@ -44,9 +45,7 @@ namespace GitCmd
             this.textBoxGitPara.Text = "status -s";
             //this.textBoxGitPara.Text = "count-objects -vH";
 
-#if DEBUG
-            this.Text += "   ***DEBUG***";
-#endif
+            this.AddDebug();
 
             this.comboBoxPara.Items.Clear();
             this.comboBoxPara.Items.Add("branch");
@@ -69,6 +68,9 @@ namespace GitCmd
             this.contextMenuStripCheckedListBox.Items.Add("Check All");
             this.contextMenuStripCheckedListBox.Items.Add("Check Inverse");
             this.contextMenuStripCheckedListBox.Items.Add("Check None");
+
+            this.contextMenuStripNotifyIcon.Items.Clear();
+            this.contextMenuStripNotifyIcon.Items.Add("Git");
 
             this.InitListBox();
 
@@ -99,15 +101,102 @@ namespace GitCmd
             this.textBoxGitPara.Text = this.comboBoxPara.Text;
         }
 
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            //if the form is minimized  
+            //hide it from the task bar  
+            //and show the system tray icon (represented by the NotifyIcon control)  
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Hide();
+                //this.notifyIcon1.Visible = true;
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+            //this.notifyIcon1.Visible = false;
+        }
+
+        private void contextMenuStripNotifyIcon_Opening(object sender, CancelEventArgs e)
+        {
+            //
+        }
+
+        private void contextMenuStripNotifyIcon_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            //
+
+            this.RunGitCmd();
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+            //
+        }
+
+        private void notifyIcon1_MouseMove(object sender, MouseEventArgs e)
+        {
+            //this.notifyIcon1.ShowBalloonTip(2000);
+        }
+
+        private void contextMenuStripCheckedListBox_Opening(object sender, CancelEventArgs e)
+        {
+            //
+        }
+
+        private void contextMenuStripCheckedListBox_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var text = e.ClickedItem.Text;
+            if (text == "Check All")
+            {
+                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
+                {
+                    checkedListBoxGitDir.SetItemChecked(i, true);
+                }
+            }
+            if (text == "Check Inverse")
+            {
+                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
+                {
+                    var stat = checkedListBoxGitDir.GetItemChecked(i);
+                    checkedListBoxGitDir.SetItemChecked(i, !stat);
+                }
+            }
+            if (text == "Check None")
+            {
+                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
+                {
+                    checkedListBoxGitDir.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        private void contextMenuStripCheckedListBox_Closing(object sender, ToolStripDropDownClosingEventArgs e)
+        {
+            //
+        }
+
         // ##############################
         // Functions
         // ##############################
 
+        private void AddDebug()
+        {
+#if DEBUG
+            this.Text += "   ***DEBUG***";
+#endif
+        }
+
         public void InitListBox()
         {
             // Read Config-File
-            // 1="C:\Dev\Op\Git\Samples"
-            // 2="C:\Dev\Projects\otmarp"
+            // 1="C:\Dev\GitHub\OtmarP\GitCmd"
+            // 2="C:\Dev\Op\Git\Samples"
+            // 3="C:\Dev\Projects\otmarp"
+            // 4="C:\Dev\Projects\Root"
 
             string[] fileContent = new string[0];
 
@@ -164,6 +253,25 @@ namespace GitCmd
                     }
                 }
             }
+
+            // 1="C:\Dev\GitHub\OtmarP\GitCmd"
+            // 2="C:\Dev\Op\Git\Samples"
+            // 3="C:\Dev\Projects\otmarp"
+            // 4="C:\Dev\Projects\Root"
+#if DEBUG
+            var path2 = @"C:\Dev\Op\Git\Samples";
+            path2 = path2.Replace("\"", "");
+            checkedListBoxGitDir.Items.Add(path2);
+
+            path2 = @"C:\Dev\Projects\otmarp";
+            path2 = path2.Replace("\"", "");
+            checkedListBoxGitDir.Items.Add(path2);
+
+            path2 = @"C:\Dev\Projects\Root";
+            path2 = path2.Replace("\"", "");
+            checkedListBoxGitDir.Items.Add(path2);
+#endif
+
             for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
             {
                 checkedListBoxGitDir.SetItemChecked(i, true);
@@ -187,6 +295,10 @@ namespace GitCmd
 
             string resultAll = "";
 
+            int countGitSumAll = 0;
+            int countGitSumCheck = 0;
+            int countItemSum = 0;
+
             for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
             {
                 if (checkedListBoxGitDir.GetItemCheckState(i) == CheckState.Checked)
@@ -202,6 +314,7 @@ namespace GitCmd
 
                     if (System.IO.Directory.Exists(this.textBoxGitDir.Text))
                     {
+                        int countItems = 0;
                         header1 = (i + 1).ToString() + "/" + checkedListBoxGitDir.Items.Count.ToString() + ".) " + this.textBoxGitDir.Text;
                         try
                         {
@@ -243,6 +356,14 @@ namespace GitCmd
                             // \n -> \r\n
                             result1 = result1.Replace("\n", "\r\n");
                             error1 = error1.Replace("\n", "\r\n");
+
+                            countItems = result1.Split(new string[] { "\r\n" }, System.StringSplitOptions.RemoveEmptyEntries).Length;
+                            countGitSumAll++;
+                            if (countItems >= 1)
+                            {
+                                countGitSumCheck += 1;
+                            }
+                            countItemSum += countItems;
                         }
                         catch (Exception ex)
                         {
@@ -262,7 +383,7 @@ namespace GitCmd
 
                         if (result2 != "")
                         {
-                            result2 = header1 + "\r\n" + result2;
+                            result2 = header1 + " (" + countItems.ToString() + ")" + "\r\n" + result2;
                         }
                         else
                         {
@@ -281,48 +402,21 @@ namespace GitCmd
                         }
                         resultAll = resultAll + result2;
                     }
+
+                    this.Text = "GitCmd Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString() + " Items: " + countItemSum.ToString();
+                    this.AddDebug();
+
+                    this.notifyIcon1.Text = "GitCmd Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString() + " Items: " + countItemSum.ToString();
+
+                    this.notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+                    this.notifyIcon1.BalloonTipTitle = "Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString();
+                    this.notifyIcon1.BalloonTipText = "Items: " + countItemSum.ToString();
+                    this.notifyIcon1.ShowBalloonTip(2000);
                 }
             }
 
             // Display the command output.
             this.textBoxResult.Text = resultAll;
-        }
-
-        private void contextMenuStripCheckedListBox_Opening(object sender, CancelEventArgs e)
-        {
-            //
-        }
-
-        private void contextMenuStripCheckedListBox_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            var text = e.ClickedItem.Text;
-            if (text == "Check All")
-            {
-                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
-                {
-                    checkedListBoxGitDir.SetItemChecked(i, true);
-                }
-            }
-            if (text == "Check Inverse")
-            {
-                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
-                {
-                    var stat = checkedListBoxGitDir.GetItemChecked(i);
-                    checkedListBoxGitDir.SetItemChecked(i, !stat);
-                }
-            }
-            if (text == "Check None")
-            {
-                for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
-                {
-                    checkedListBoxGitDir.SetItemChecked(i, false);
-                }
-            }
-        }
-
-        private void contextMenuStripCheckedListBox_Closing(object sender, ToolStripDropDownClosingEventArgs e)
-        {
-            //
         }
 
         private string GetGitBranch(string path)
