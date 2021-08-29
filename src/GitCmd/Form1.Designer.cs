@@ -96,7 +96,7 @@ namespace GitCmd
             this.textBoxResult.Multiline = true;
             this.textBoxResult.Name = "textBoxResult";
             this.textBoxResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBoxResult.Size = new System.Drawing.Size(441, 56);
+            this.textBoxResult.Size = new System.Drawing.Size(441, 135);
             this.textBoxResult.TabIndex = 4;
             // 
             // panel1
@@ -147,7 +147,7 @@ namespace GitCmd
             this.checkedListBoxGitDir.IntegralHeight = false;
             this.checkedListBoxGitDir.Location = new System.Drawing.Point(14, 15);
             this.checkedListBoxGitDir.Name = "checkedListBoxGitDir";
-            this.checkedListBoxGitDir.Size = new System.Drawing.Size(441, 79);
+            this.checkedListBoxGitDir.Size = new System.Drawing.Size(441, 52);
             this.checkedListBoxGitDir.TabIndex = 5;
             // 
             // contextMenuStripCheckedListBox
@@ -196,7 +196,7 @@ namespace GitCmd
             // 
             this.splitContainer1.Panel2.Controls.Add(this.textBoxResult);
             this.splitContainer1.Size = new System.Drawing.Size(473, 295);
-            this.splitContainer1.SplitterDistance = 164;
+            this.splitContainer1.SplitterDistance = 81;
             this.splitContainer1.TabIndex = 5;
             // 
             // notifyIcon1

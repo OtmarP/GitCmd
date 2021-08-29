@@ -21,6 +21,7 @@ namespace GitCmd
             this.toolStripStatusLabel1.Text = "";
 
             //------------------------------
+            // Sa.28.08.2021 17:56:21 -op- checkBoxOnlyChanges.Checked = true
             // Mo.09.08.2021 10:05:56 -op- Minimize Application To System Tray mit notifyIcon1
             // So.20.06.2021 18:16:19 -op- mit splitContainer1
             // Sa.19.06.2021 18:32:10 -op- mit GetGitBranch()
@@ -44,6 +45,8 @@ namespace GitCmd
             this.textBoxGitCmd.Text = "git.exe";
             this.textBoxGitPara.Text = "status -s";
             //this.textBoxGitPara.Text = "count-objects -vH";
+
+            this.checkBoxOnlyChanges.Checked = true;
 
             this.AddDebug();
 
