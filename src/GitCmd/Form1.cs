@@ -21,6 +21,7 @@ namespace GitCmd
             this.toolStripStatusLabel1.Text = "";
 
             //------------------------------
+            // Mo.15.11.2021 20:54:49 -op- countGitAll
             // Sa.28.08.2021 17:56:21 -op- checkBoxOnlyChanges.Checked = true
             // Mo.09.08.2021 10:05:56 -op- Minimize Application To System Tray mit notifyIcon1
             // So.20.06.2021 18:16:19 -op- mit splitContainer1
@@ -298,9 +299,12 @@ namespace GitCmd
 
             string resultAll = "";
 
+            int countGitAll = 0;
             int countGitSumAll = 0;
             int countGitSumCheck = 0;
             int countItemSum = 0;
+
+            countGitAll = checkedListBoxGitDir.Items.Count;
 
             for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
             {
@@ -406,13 +410,13 @@ namespace GitCmd
                         resultAll = resultAll + result2;
                     }
 
-                    this.Text = "GitCmd Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString() + " Items: " + countItemSum.ToString();
+                    this.Text = "GitCmd Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString() + "/" + countGitAll.ToString() + " Items: " + countItemSum.ToString();
                     this.AddDebug();
 
-                    this.notifyIcon1.Text = "GitCmd Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString() + " Items: " + countItemSum.ToString();
+                    this.notifyIcon1.Text = "GitCmd Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString() + "/" + countGitAll.ToString() + " Items: " + countItemSum.ToString();
 
                     this.notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
-                    this.notifyIcon1.BalloonTipTitle = "Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString();
+                    this.notifyIcon1.BalloonTipTitle = "Repos: " + countGitSumCheck.ToString() + "/" + countGitSumAll.ToString() + "/" + countGitAll.ToString();
                     this.notifyIcon1.BalloonTipText = "Items: " + countItemSum.ToString();
                     this.notifyIcon1.ShowBalloonTip(2000);
                 }
