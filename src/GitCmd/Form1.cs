@@ -33,6 +33,8 @@ namespace GitCmd
             // So.13.06.2021 14:14:09 -op- mit Sample RunCmd.cs ExecuteCurl()
             // Fr.04.06.2021 18:17:00 -op- Cr. FW 4.7.2
             //------------------------------
+            // ToDo:
+            //------------------------------
         }
 
         private void Form1_Load(object sender, EventArgs e)
