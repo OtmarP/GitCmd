@@ -33,7 +33,7 @@ namespace GitCmd
             // So.13.06.2021 14:14:09 -op- mit Sample RunCmd.cs ExecuteCurl()
             // Fr.04.06.2021 18:17:00 -op- Cr. FW 4.7.2
             //------------------------------
-            // ToDo:
+            // ToDo: open in Explorer
             //------------------------------
         }
 
@@ -74,6 +74,7 @@ namespace GitCmd
             this.contextMenuStripCheckedListBox.Items.Add("Check All");
             this.contextMenuStripCheckedListBox.Items.Add("Check Inverse");
             this.contextMenuStripCheckedListBox.Items.Add("Check None");
+            this.contextMenuStripCheckedListBox.Items.Add("Open in Explorer");
 
             this.contextMenuStripNotifyIcon.Items.Clear();
             this.contextMenuStripNotifyIcon.Items.Add("Git");
