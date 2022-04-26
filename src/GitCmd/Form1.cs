@@ -14,6 +14,12 @@ namespace GitCmd
 {
     public partial class Form1 : Form
     {
+        private const string _Menue_Check_All = "Check All";
+        private const string _Menue_Check_Inverse = "Check Inverse";
+        private const string _Menue_Check_None = "Check None";
+        // ----------------------------------------------------------
+        private const string _Menue_Open_in_Explorer = "Open in Explorer";
+
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +27,7 @@ namespace GitCmd
             this.toolStripStatusLabel1.Text = "";
 
             //------------------------------
+            // Di.26.04.2022 21:12:34 -op- open in Explorer
             // Mo.15.11.2021 20:54:49 -op- countGitAll
             // Sa.28.08.2021 17:56:21 -op- checkBoxOnlyChanges.Checked = true
             // Mo.09.08.2021 10:05:56 -op- Minimize Application To System Tray mit notifyIcon1
@@ -33,7 +40,8 @@ namespace GitCmd
             // So.13.06.2021 14:14:09 -op- mit Sample RunCmd.cs ExecuteCurl()
             // Fr.04.06.2021 18:17:00 -op- Cr. FW 4.7.2
             //------------------------------
-            // ToDo: open in Explorer
+            // ToDo: Show Version
+            // ToDo: Show *** Debug ***
             //------------------------------
         }
 
@@ -71,10 +79,11 @@ namespace GitCmd
             this.comboBoxPara.Text = this.textBoxGitPara.Text;
 
             this.contextMenuStripCheckedListBox.Items.Clear();
-            this.contextMenuStripCheckedListBox.Items.Add("Check All");
-            this.contextMenuStripCheckedListBox.Items.Add("Check Inverse");
-            this.contextMenuStripCheckedListBox.Items.Add("Check None");
-            this.contextMenuStripCheckedListBox.Items.Add("Open in Explorer");
+            this.contextMenuStripCheckedListBox.Items.Add(_Menue_Check_All);
+            this.contextMenuStripCheckedListBox.Items.Add(_Menue_Check_Inverse);
+            this.contextMenuStripCheckedListBox.Items.Add(_Menue_Check_None);
+            this.contextMenuStripCheckedListBox.Items.Add("-");
+            this.contextMenuStripCheckedListBox.Items.Add(_Menue_Open_in_Explorer);
 
             this.contextMenuStripNotifyIcon.Items.Clear();
             this.contextMenuStripNotifyIcon.Items.Add("Git");
@@ -157,14 +166,14 @@ namespace GitCmd
         private void contextMenuStripCheckedListBox_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             var text = e.ClickedItem.Text;
-            if (text == "Check All")
+            if (text == _Menue_Check_All)
             {
                 for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
                 {
                     checkedListBoxGitDir.SetItemChecked(i, true);
                 }
             }
-            if (text == "Check Inverse")
+            if (text == _Menue_Check_Inverse)
             {
                 for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
                 {
@@ -172,11 +181,20 @@ namespace GitCmd
                     checkedListBoxGitDir.SetItemChecked(i, !stat);
                 }
             }
-            if (text == "Check None")
+            if (text == _Menue_Check_None)
             {
                 for (int i = 0; i < checkedListBoxGitDir.Items.Count; i++)
                 {
                     checkedListBoxGitDir.SetItemChecked(i, false);
+                }
+            }
+            if (text == _Menue_Open_in_Explorer) {
+
+                var item = checkedListBoxGitDir.SelectedItem;
+                if (item!=null) {
+                    string path = item.ToString();
+                    //MessageBox.Show(path);
+                    System.Diagnostics.Process.Start(path);
                 }
             }
         }
